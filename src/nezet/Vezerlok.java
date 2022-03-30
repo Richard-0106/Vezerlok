@@ -3,6 +3,7 @@ package nezet;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.ListModel;
 
 
@@ -233,6 +234,11 @@ public class Vezerlok extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Dinamikus tartalom"));
 
         chbHozzaFuz.setText("hozzáfűz");
+        chbHozzaFuz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chbHozzaFuzActionPerformed(evt);
+            }
+        });
 
         btnListbe.setText("combo tartalmát Listbe");
         btnListbe.addActionListener(new java.awt.event.ActionListener() {
@@ -242,11 +248,12 @@ public class Vezerlok extends javax.swing.JFrame {
         });
 
         buttonGroup3.add(rdbEleje);
-        rdbEleje.setSelected(true);
         rdbEleje.setText("elejére");
+        rdbEleje.setEnabled(false);
 
         buttonGroup3.add(rdbVege);
         rdbVege.setText("végére");
+        rdbVege.setEnabled(false);
 
         jLabel3.setText("Új szak:");
 
@@ -375,9 +382,12 @@ public class Vezerlok extends javax.swing.JFrame {
     private void btnJelszotMutatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJelszotMutatActionPerformed
         char[] betuk = pswJelszo.getPassword();
         String jsz = "";
+        
+          txtJelszo.setText(jsz);
         if(jComboBox1.getSelectedIndex() > 0){
          
          String szak = jComboBox1.getSelectedItem().toString();
+         
          txtJelszo.setText(szak);
         }
        
@@ -398,6 +408,7 @@ public class Vezerlok extends javax.swing.JFrame {
         }else{
         jTextArea1.setText("Nincs hírlevél kiválasztva");
         }
+       
     }//GEN-LAST:event_btnCombobaActionPerformed
 
     private void btnListbeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListbeActionPerformed
@@ -436,6 +447,21 @@ public class Vezerlok extends javax.swing.JFrame {
     private void pswJelszoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswJelszoActionPerformed
   
     }//GEN-LAST:event_pswJelszoActionPerformed
+
+    private void chbHozzaFuzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbHozzaFuzActionPerformed
+     
+        JRadioButton[] buttons = new JRadioButton[]{rdbEleje,rdbVege};
+      if(chbHozzaFuz.isSelected()){
+      for (JRadioButton btn : buttons) {
+         btn.setEnabled(true);
+    }
+       }
+       else{
+          for (JRadioButton btn : buttons) {
+         btn.setEnabled(false);
+    }
+       }
+    }//GEN-LAST:event_chbHozzaFuzActionPerformed
 
     /**
      * @param args the command line arguments

@@ -509,6 +509,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="hozz&#xe1;f&#x171;z"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chbHozzaFuzActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnListbe">
           <Properties>
@@ -523,8 +526,8 @@
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroup3"/>
             </Property>
-            <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="elej&#xe9;re"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rdbVege">
@@ -533,6 +536,7 @@
               <ComponentRef name="buttonGroup3"/>
             </Property>
             <Property name="text" type="java.lang.String" value="v&#xe9;g&#xe9;re"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
