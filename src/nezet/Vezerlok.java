@@ -1,7 +1,7 @@
 package nezet;
 
-import javafx.event.EventType;
-import javafx.scene.input.KeyEvent;
+
+import java.awt.event.KeyEvent;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -275,6 +275,11 @@ public class Vezerlok extends javax.swing.JFrame {
                 txtujSzakActionPerformed(evt);
             }
         });
+        txtujSzak.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtujSzakKeyPressed(evt);
+            }
+        });
 
         btnComboba.setText("Felvesz");
         btnComboba.addActionListener(new java.awt.event.ActionListener() {
@@ -398,25 +403,19 @@ public class Vezerlok extends javax.swing.JFrame {
 
     private void btnJelszotMutatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJelszotMutatActionPerformed
         char[] betuk = pswJelszo.getPassword();
-        String jsz = "";
-
-        txtJelszo.setText(jsz);
+       
         if (jComboBox1.getSelectedIndex() > 0) {
-
             String szak = jComboBox1.getSelectedItem().toString();
-
             txtJelszo.setText(szak);
+            pswJelszo.setText(szak);
         }
-
 
     }//GEN-LAST:event_btnJelszotMutatActionPerformed
 
     private void btnCombobaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCombobaActionPerformed
 
         String szak = jComboBox1.getSelectedItem().toString();
-
         txtujSzak.setText(szak);
-
 
     }//GEN-LAST:event_btnCombobaActionPerformed
 
@@ -476,19 +475,13 @@ public class Vezerlok extends javax.swing.JFrame {
 
     private void txtujSzakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtujSzakActionPerformed
 
-        EventType<KeyEvent> KEY_PRESSED = KeyEvent.KEY_PRESSED;
-
-        if (!txtujSzak.getText().isEmpty()) {
-
-        }
-
     }//GEN-LAST:event_txtujSzakActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         msg += "Biztos ki akar lépni?";
         String[] valasz = {"igen", "nem"};
-        ImageIcon icon = new ImageIcon("src/exit.jpg");
-        int ertesites = JOptionPane.showOptionDialog(this.rootPane, msg, "kilépés", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, icon, valasz, valasz[1]);
+        ImageIcon icon = new ImageIcon("exit.png");
+        int ertesites = JOptionPane.showOptionDialog(null, msg, "kilépés", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, icon, valasz, valasz[1]);
         if (ertesites == 0) {
             System.exit(WIDTH);
         }
@@ -507,6 +500,12 @@ public class Vezerlok extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void txtujSzakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtujSzakKeyPressed
+       if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+           btnComboba.doClick();
+       }
+    }//GEN-LAST:event_txtujSzakKeyPressed
 
     /**
      * @param args the command line arguments
