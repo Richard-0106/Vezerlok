@@ -481,7 +481,7 @@ public class Vezerlok extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         msg += "Biztos ki akar lépni?";
         String[] valasz = {"igen", "nem"};
-        ImageIcon icon = new ImageIcon("exit.png");
+        ImageIcon icon = new ImageIcon(this.getClass().getResource("kepek/images.jpg"));
         int ertesites = JOptionPane.showOptionDialog(null, msg, "kilépés", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, icon, valasz, valasz[1]);
         if (ertesites == 0) {
             System.exit(WIDTH);
