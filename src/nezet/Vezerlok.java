@@ -420,8 +420,8 @@ public class Vezerlok extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCombobaActionPerformed
 
     private void btnListbeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListbeActionPerformed
-        if (btnListbe.isSelected()) {
-        }
+    
+        if (jToggleButton1.isSelected()) {
 
         if (jComboBox1.getSelectedIndex() > 0) {
             DefaultListModel dlm = new DefaultListModel();
@@ -444,6 +444,7 @@ public class Vezerlok extends javax.swing.JFrame {
             jList1.setModel(dlm);
         } else {
             JOptionPane.showMessageDialog(this.rootPane, "Nincs szak kiválasztva!");
+        }
         }
     }//GEN-LAST:event_btnListbeActionPerformed
 
