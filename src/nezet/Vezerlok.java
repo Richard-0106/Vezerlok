@@ -1,17 +1,19 @@
-
 package nezet;
 
+import javafx.event.EventType;
+import javafx.scene.input.KeyEvent;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.ListModel;
-
 
 public class Vezerlok extends javax.swing.JFrame {
 
     public Vezerlok() {
         initComponents();
     }
+    String msg = "";
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -63,10 +65,20 @@ public class Vezerlok extends javax.swing.JFrame {
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Vezérlők használata");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jTabbedPane1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
 
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -258,6 +270,11 @@ public class Vezerlok extends javax.swing.JFrame {
         jLabel3.setText("Új szak:");
 
         txtujSzak.setText("jTextField1");
+        txtujSzak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtujSzakActionPerformed(evt);
+            }
+        });
 
         btnComboba.setText("Felvesz");
         btnComboba.addActionListener(new java.awt.event.ActionListener() {
@@ -382,41 +399,36 @@ public class Vezerlok extends javax.swing.JFrame {
     private void btnJelszotMutatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJelszotMutatActionPerformed
         char[] betuk = pswJelszo.getPassword();
         String jsz = "";
-        
-          txtJelszo.setText(jsz);
-        if(jComboBox1.getSelectedIndex() > 0){
-         
-         String szak = jComboBox1.getSelectedItem().toString();
-         
-         txtJelszo.setText(szak);
+
+        txtJelszo.setText(jsz);
+        if (jComboBox1.getSelectedIndex() > 0) {
+
+            String szak = jComboBox1.getSelectedItem().toString();
+
+            txtJelszo.setText(szak);
         }
-       
-        
+
+
     }//GEN-LAST:event_btnJelszotMutatActionPerformed
 
     private void btnCombobaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCombobaActionPerformed
-        if(jRadioButton1.isSelected()||jRadioButton2.isSelected()||jRadioButton3.isSelected()){
+
         String szak = jComboBox1.getSelectedItem().toString();
-        
+
         txtujSzak.setText(szak);
-        
-        }else{
-            JOptionPane.showMessageDialog(this.rootPane, "Nincs nem kiválasztva!");
-        }
-        if(jCheckBox1.isSelected()){
-        jTextArea1.setText("Ki van választva hírlevél");
-        }else{
-        jTextArea1.setText("Nincs hírlevél kiválasztva");
-        }
-       
+
+
     }//GEN-LAST:event_btnCombobaActionPerformed
 
     private void btnListbeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListbeActionPerformed
+        if (btnListbe.isSelected()) {
+        }
+
         if (jComboBox1.getSelectedIndex() > 0) {
             DefaultListModel dlm = new DefaultListModel();
-            
+
             ListModel<String> listModel = jList1.getModel();
-            
+
             if (chbHozzaFuz.isSelected()) {
                 for (int i = 0; i < listModel.getSize(); i++) {
                     dlm.addElement(listModel.getElementAt(i));
@@ -429,7 +441,7 @@ public class Vezerlok extends javax.swing.JFrame {
             } else {
                 dlm.addElement(szak);
             }
-            
+
             jList1.setModel(dlm);
         } else {
             JOptionPane.showMessageDialog(this.rootPane, "Nincs szak kiválasztva!");
@@ -437,31 +449,64 @@ public class Vezerlok extends javax.swing.JFrame {
     }//GEN-LAST:event_btnListbeActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        
+
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-      
+
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void pswJelszoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswJelszoActionPerformed
-  
+
     }//GEN-LAST:event_pswJelszoActionPerformed
 
     private void chbHozzaFuzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbHozzaFuzActionPerformed
-     
-        JRadioButton[] buttons = new JRadioButton[]{rdbEleje,rdbVege};
-      if(chbHozzaFuz.isSelected()){
-      for (JRadioButton btn : buttons) {
-         btn.setEnabled(true);
-    }
-       }
-       else{
-          for (JRadioButton btn : buttons) {
-         btn.setEnabled(false);
-    }
-       }
+
+        JRadioButton[] buttons = new JRadioButton[]{rdbEleje, rdbVege};
+        if (chbHozzaFuz.isSelected()) {
+            for (JRadioButton btn : buttons) {
+                btn.setEnabled(true);
+            }
+        } else {
+            for (JRadioButton btn : buttons) {
+                btn.setEnabled(false);
+            }
+        }
     }//GEN-LAST:event_chbHozzaFuzActionPerformed
+
+    private void txtujSzakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtujSzakActionPerformed
+
+        EventType<KeyEvent> KEY_PRESSED = KeyEvent.KEY_PRESSED;
+
+        if (!txtujSzak.getText().isEmpty()) {
+
+        }
+
+    }//GEN-LAST:event_txtujSzakActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        msg += "Biztos ki akar lépni?";
+        String[] valasz = {"igen", "nem"};
+        ImageIcon icon = new ImageIcon("src/exit.jpg");
+        int ertesites = JOptionPane.showOptionDialog(this.rootPane, msg, "kilépés", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, icon, valasz, valasz[1]);
+        if (ertesites == 0) {
+            System.exit(WIDTH);
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        if (jTabbedPane1.getSelectedIndex() == 1) {
+            if (buttonGroup1.getSelection()==null) {
+
+                JOptionPane.showMessageDialog(this.rootPane, "Nincs nem kiválasztva!");
+            }
+            if (jCheckBox1.isSelected()) {
+                jTextArea1.setText("Ki van választva hírlevél");
+            } else {
+                jTextArea1.setText("Nincs hírlevél kiválasztva");
+            }
+        }
+    }//GEN-LAST:event_jTabbedPane1StateChanged
 
     /**
      * @param args the command line arguments
